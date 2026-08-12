@@ -1,0 +1,84 @@
+{
+  "name": "ceramics-api",
+  "type": "service",
+  "version": "0.1.0",
+  "language": "Ballerina",
+  "buildpack": "docker",
+  "appPath": "ceramics-api",
+  "entrypoint": "deployment/service",
+  "exposure": "intranet",
+  "stories": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "dependencies": [
+    {
+      "description": "Stores products, stock levels, carts, orders, order items, and payment records.",
+      "kind": "platform-resource",
+      "name": "ceramics-db",
+      "resourceType": "postgres"
+    },
+    {
+      "description": "Validates bearer tokens from the gateway and resolves the caller's role (Shopper vs Store Admin) for authenticated endpoints.",
+      "kind": "platform-resource",
+      "name": "user-auth",
+      "parameters": {
+        "scopes": "openid profile email"
+      },
+      "resourceType": "thunder-app"
+    },
+    {
+      "config": [
+        {
+          "description": "Stripe secret API key used to create and capture card payments.",
+          "key": "STRIPE_API_KEY",
+          "secret": true
+        }
+      ],
+      "description": "Stripe REST API — creates and captures a payment for each order's card charge.",
+      "kind": "external",
+      "name": "payment-provider",
+      "specPath": "https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.json",
+      "style": "rest-api"
+    },
+    {
+      "candidates": [
+        {
+          "name": "sendgrid",
+          "style": "rest-api"
+        },
+        {
+          "name": "postmark",
+          "style": "rest-api"
+        },
+        {
+          "name": "amazon-ses",
+          "package": "npm:@aws-sdk/client-sesv2",
+          "style": "sdk"
+        }
+      ],
+      "description": "Transactional email provider — sends the order confirmation email after a successful checkout. No signal in the requirements points to one provider; pick when ready.",
+      "kind": "external",
+      "name": "email-provider"
+    }
+  ],
+  "description": "Ballerina backend service owning the product catalog, stock levels, cart, checkout/order creation, payment orchestration, and order history/listing. Validates Thunder tokens for authenticated endpoints (order history, all admin actions) and allows guest access to catalog browsing, cart, and guest checkout. Does not render any UI and holds no long-lived session state beyond the cart/order records themselves.",
+  "skillsPinned": [
+    "openapi-conventions",
+    "ballerina",
+    "api-management",
+    "thunder-authentication"
+  ]
+}

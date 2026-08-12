@@ -1,0 +1,128 @@
+{
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "statement": "Shoppers can browse the product catalog",
+      "stories": [1],
+      "criteria": [
+        { "id": "AC-001-a", "must": "The catalog page lists available products with name, price, and image", "method": "e2e" },
+        { "id": "AC-001-b", "must": "Products can be listed without signing in", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-002",
+      "statement": "Shoppers can view detailed information about a product",
+      "stories": [2],
+      "criteria": [
+        { "id": "AC-002-a", "must": "Selecting a product opens a detail view showing its description, price, and stock status", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-003",
+      "statement": "Shoppers can add products to a cart",
+      "stories": [3],
+      "criteria": [
+        { "id": "AC-003-a", "must": "Adding a product to the cart increases the cart's item count", "method": "e2e" },
+        { "id": "AC-003-b", "must": "Adding a sold-out product to the cart is prevented", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-004",
+      "statement": "Shoppers can view and edit the contents of their cart",
+      "stories": [4],
+      "criteria": [
+        { "id": "AC-004-a", "must": "The cart view lists each item with its quantity and subtotal", "method": "e2e" },
+        { "id": "AC-004-b", "must": "Changing an item's quantity updates the cart total", "method": "e2e" },
+        { "id": "AC-004-c", "must": "Removing an item deletes it from the cart", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-005",
+      "statement": "Shoppers can check out without creating an account",
+      "stories": [5],
+      "criteria": [
+        { "id": "AC-005-a", "must": "Checkout can be completed while not signed in, using a contact email", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-006",
+      "statement": "Shoppers can pay for their order by card",
+      "stories": [6],
+      "criteria": [
+        { "id": "AC-006-a", "must": "Checkout collects card payment details and submits a charge before creating the order", "method": "e2e" },
+        { "id": "AC-006-b", "must": "A declined or failed card payment prevents the order from being created", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-007",
+      "statement": "Shoppers receive an email confirmation after placing an order",
+      "stories": [7],
+      "criteria": [
+        { "id": "AC-007-a", "must": "A confirmation email is sent after a successful order", "method": "manual" }
+      ]
+    },
+    {
+      "id": "REQ-008",
+      "statement": "Shoppers can sign in to an account",
+      "stories": [8],
+      "criteria": [
+        { "id": "AC-008-a", "must": "A shopper can sign in via the platform sign-in flow", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-009",
+      "statement": "Signed-in shoppers can view their order history",
+      "stories": [9],
+      "criteria": [
+        { "id": "AC-009-a", "must": "A signed-in shopper sees a list of their own past orders", "method": "e2e" },
+        { "id": "AC-009-b", "must": "A shopper cannot view another shopper's orders", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-010",
+      "statement": "The Store Admin can sign in to an admin area",
+      "stories": [10],
+      "criteria": [
+        { "id": "AC-010-a", "must": "The admin area is reachable only after signing in", "method": "e2e" },
+        { "id": "AC-010-b", "must": "A non-admin signed-in shopper cannot reach the admin area", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-011",
+      "statement": "The Store Admin can add, edit, and remove products in the catalog",
+      "stories": [11],
+      "criteria": [
+        { "id": "AC-011-a", "must": "The Store Admin can create a new product with name, description, price, and image", "method": "e2e" },
+        { "id": "AC-011-b", "must": "The Store Admin can edit an existing product's details", "method": "e2e" },
+        { "id": "AC-011-c", "must": "The Store Admin can remove a product from the catalog", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-012",
+      "statement": "The Store Admin can set and update stock quantities for each product",
+      "stories": [12],
+      "criteria": [
+        { "id": "AC-012-a", "must": "The Store Admin can set a product's stock quantity", "method": "e2e" },
+        { "id": "AC-012-b", "must": "The catalog reflects the updated stock quantity immediately after the change", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-013",
+      "statement": "Products automatically show as sold out when stock reaches zero",
+      "stories": [13],
+      "criteria": [
+        { "id": "AC-013-a", "must": "A product with zero stock is displayed as sold out to shoppers", "method": "e2e" },
+        { "id": "AC-013-b", "must": "A sold-out product cannot be added to the cart", "method": "e2e" }
+      ]
+    },
+    {
+      "id": "REQ-014",
+      "statement": "The Store Admin can view incoming orders to fulfill them",
+      "stories": [14],
+      "criteria": [
+        { "id": "AC-014-a", "must": "The admin order list shows every order regardless of which shopper placed it", "method": "e2e" },
+        { "id": "AC-014-b", "must": "Each order in the admin list shows its items, total, and status", "method": "e2e" }
+      ]
+    }
+  ]
+}
