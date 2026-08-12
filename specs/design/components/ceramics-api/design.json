@@ -54,24 +54,22 @@
       "style": "rest-api"
     },
     {
-      "candidates": [
+      "config": [
         {
-          "name": "sendgrid",
-          "style": "rest-api"
+          "description": "SendGrid API key used to send transactional email.",
+          "key": "SENDGRID_API_KEY",
+          "secret": true
         },
         {
-          "name": "postmark",
-          "style": "rest-api"
-        },
-        {
-          "name": "amazon-ses",
-          "package": "npm:@aws-sdk/client-sesv2",
-          "style": "sdk"
+          "description": "Verified sender address SendGrid emails are sent from.",
+          "key": "SENDGRID_FROM_EMAIL"
         }
       ],
-      "description": "Transactional email provider — sends the order confirmation email after a successful checkout. No signal in the requirements points to one provider; pick when ready.",
+      "description": "SendGrid — sends the order confirmation email after a successful checkout.",
       "kind": "external",
-      "name": "email-provider"
+      "name": "email-provider",
+      "package": "npm:@sendgrid/mail@^8",
+      "style": "sdk"
     }
   ],
   "description": "Ballerina backend service owning the product catalog, stock levels, cart, checkout/order creation, payment orchestration, and order history/listing. Validates Thunder tokens for authenticated endpoints (order history, all admin actions) and allows guest access to catalog browsing, cart, and guest checkout. Does not render any UI and holds no long-lived session state beyond the cart/order records themselves.",
