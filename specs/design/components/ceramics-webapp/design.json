@@ -23,23 +23,42 @@
     13,
     14
   ],
+  "description": "React single-page application serving both the shopper storefront (catalog, cart, guest/account checkout, order history) and the Store Admin area (catalog and stock management, order list), gated by role after Thunder sign-in. Talks only to the Ceramics API for data; holds no secrets and performs no payment or email logic itself.",
   "dependencies": [
     {
-      "description": "Calls the Ceramics API for catalog browsing, cart, checkout, order history, and admin catalog/order management.",
       "kind": "component",
-      "name": "ceramics-api"
+      "name": "ceramics-api",
+      "description": "Calls the Ceramics API for catalog browsing, cart, checkout, order history, and admin catalog/order management.",
+      "wiring": {
+        "endpoint": {
+          "component": "store-handmade-ceramicszz1-ceramics-api",
+          "name": "http",
+          "visibility": "project",
+          "envBindings": {
+            "address": "CERAMICS_API_URL"
+          }
+        }
+      }
     },
     {
-      "description": "Thunder OIDC client used for optional shopper sign-in and required Store Admin sign-in via OIDC + PKCE.",
       "kind": "platform-resource",
       "name": "user-auth",
+      "description": "Thunder OIDC client used for optional shopper sign-in and required Store Admin sign-in via OIDC + PKCE.",
+      "resourceType": "thunder-app",
       "parameters": {
         "scopes": "openid profile email"
       },
-      "resourceType": "thunder-app"
+      "wiring": {
+        "ref": "store-handmade-ce-6f8c807d",
+        "envBindings": {
+          "client_id": "USER_AUTH_CLIENT_ID",
+          "issuer": "USER_AUTH_ISSUER",
+          "jwks_url": "USER_AUTH_JWKS_URL",
+          "scopes": "USER_AUTH_SCOPES"
+        }
+      }
     }
   ],
-  "description": "React single-page application serving both the shopper storefront (catalog, cart, guest/account checkout, order history) and the Store Admin area (catalog and stock management, order list), gated by role after Thunder sign-in. Talks only to the Ceramics API for data; holds no secrets and performs no payment or email logic itself.",
   "skillsPinned": [
     "wireframes",
     "react-webapp",
